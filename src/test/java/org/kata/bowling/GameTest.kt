@@ -16,4 +16,17 @@ class GameTest {
         assertThat(game.score()).isEqualTo(7)
     }
 
+    @Test
+    fun `the score of a spare is the sum of the rolled pins plus the next roll as a bonus`() {
+        val game = Game()
+
+        game.roll(6)
+        game.roll(4)
+
+        game.roll(8)
+        game.roll(1)
+
+        assertThat(game.score()).isEqualTo(27)
+    }
+
 }
