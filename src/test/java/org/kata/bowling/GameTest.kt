@@ -26,6 +26,7 @@ class GameTest {
         game.roll(8)
         game.roll(1)
 
+        assertThat(game.bonus).isEqualTo(8)
         assertThat(game.score()).isEqualTo(27)
     }
 
