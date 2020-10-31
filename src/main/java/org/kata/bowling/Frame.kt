@@ -34,4 +34,8 @@ class Frame {
             strikeBonusAdded = 0
         }
     }
+
+    fun finished(): Boolean {
+        return false
+    }
 }
