@@ -4,18 +4,14 @@ class Game {
 
     private var pins = 0
     var bonus = 0
-    private var lastRoll = 0
-    private var spare = false
+    private var frame = Frame()
 
     fun roll(pins: Int) {
-        if (spare) {
+        if (frame.spare()) {
             bonus += pins
-            spare = false
+            frame.bonusGiven()
         }
-        if (lastRoll + pins == 10) {
-            spare = true
-        }
-        this.lastRoll = pins
+        frame.roll(pins)
         this.pins += pins
     }
 
@@ -23,4 +19,23 @@ class Game {
         return pins + bonus
     }
 
+    inner class Frame {
+
+        private var lastRoll = 0
+        private var spare = false
+        private var bonusGiven = false
+
+        fun roll(pins: Int) {
+            if (lastRoll + pins == 10) {
+                spare = true
+            }
+            this.lastRoll = pins
+        }
+
+        fun spare() = spare && !bonusGiven
+
+        fun bonusGiven() {
+            this.bonusGiven = true
+        }
+    }
 }
