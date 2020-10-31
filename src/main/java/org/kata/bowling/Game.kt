@@ -7,7 +7,7 @@ class Game {
     }
 
     fun score(): Int {
-        return 7
+        return 4 + 3
     }
 
 }
