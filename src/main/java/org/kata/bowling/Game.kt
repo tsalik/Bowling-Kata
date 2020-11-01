@@ -2,9 +2,6 @@ package org.kata.bowling
 
 class Game {
 
-    private var pins = 0
-    var bonus = 0
-    private var frame = Frame()
     val frames = mutableListOf<Frame>()
 
     fun roll(pins: Int) {
@@ -13,9 +10,6 @@ class Game {
         }
         val lastFrame = frames.last()
         frames[frames.lastIndexOf(lastFrame)] = lastFrame.roll(pins)
-        bonus += frame.bonus(pins)
-        frame.roll(pins)
-        this.pins += pins
     }
 
     fun score(): Int {
