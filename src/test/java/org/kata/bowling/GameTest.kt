@@ -42,4 +42,16 @@ class GameTest {
         assertThat(game.score()).isEqualTo(26)
     }
 
+    @Test
+    fun `10 frames of 9 and miss has score 90`() {
+        val game = Game()
+
+        for (x in 0..9) {
+            game.roll(9)
+            game.roll(0)
+        }
+
+        assertThat(game.score()).isEqualTo(90)
+    }
+
 }
