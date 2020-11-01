@@ -78,7 +78,7 @@ class GameTest {
     }
 
     @Test
-    fun `10 frames of strike has score of 300`() {
+    fun `All strikes has score of 300`() {
         val game = Game()
 
         for (x in 0..11) {
