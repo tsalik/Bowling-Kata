@@ -5,13 +5,27 @@ import org.junit.Test
 
 class FrameTest {
 
+    private val frame = Frame()
+
     @Test
-    fun `a frame finished in two rolls unless it's a strike`() {
-        val frame = Frame()
+    fun `a frame finishes in two rolls`() {
+        val twoRollsFrame = frame.roll(2).roll(3)
 
-        frame.roll(2)
-        frame.roll(3)
-
-        assertThat(frame.finished()).isTrue()
+        assertThat(twoRollsFrame.finished()).isTrue()
     }
+
+    @Test
+    fun `a spare finishes in two rolls`() {
+        val spareFrame = frame.roll(4).roll(6)
+
+        assertThat(spareFrame.finished()).isTrue()
+    }
+
+    @Test
+    fun `a strike finished in one roll`() {
+        val strike = frame.roll(10)
+
+        assertThat(strike.finished()).isTrue()
+    }
+
 }
