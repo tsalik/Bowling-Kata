@@ -15,15 +15,15 @@ class Game {
     fun score(): Int {
         return frames.mapIndexed { index, frame ->
             val pins = frame.pins()
-            val hasNext = frames.size > index + 1
-            val bonus = if (frame.strike() && hasNext && index < 9) {
+            val shouldApplyBonus = index < 9
+            val bonus = if (frame.strike() && shouldApplyBonus) {
                 val nextFrame = frames[index + 1]
                 if (!nextFrame.strike()) {
                     nextFrame.pins()
                 } else {
                     nextFrame.pins() + frames[index + 2].firstRoll()
                 }
-            } else if (frame.spare() && hasNext && index < 9) {
+            } else if (frame.spare() && shouldApplyBonus) {
                 val nextFrame = frames[index + 1]
                 nextFrame.firstRoll()
             } else {
