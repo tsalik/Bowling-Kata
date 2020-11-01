@@ -52,6 +52,18 @@ class GameTest {
     }
 
     @Test
+    fun `All gutter balls has score 0`() {
+        val game = Game()
+
+        for (x in 0..9) {
+            game.roll(0)
+            game.roll(0)
+        }
+
+        assertThat(game.score()).isEqualTo(0)
+    }
+
+    @Test
     fun `10 frames of 9 and miss has score 90`() {
         val game = Game()
 
