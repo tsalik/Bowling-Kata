@@ -13,6 +13,9 @@ class GameTest {
         game.roll(3)
 
         assertThat(game.score()).isEqualTo(7)
+        assertThat(game.frames).contains(
+            Frame(firstThrow = 4, secondThrow = 3)
+        )
     }
 
     @Test
@@ -25,8 +28,11 @@ class GameTest {
         game.roll(8)
         game.roll(1)
 
-        assertThat(game.bonus).isEqualTo(8)
         assertThat(game.score()).isEqualTo(27)
+        assertThat(game.frames).contains(
+            Frame(firstThrow = 6, secondThrow = 4),
+            Frame(firstThrow = 8, secondThrow = 1)
+        )
     }
 
     @Test
@@ -38,8 +44,11 @@ class GameTest {
         game.roll(7)
         game.roll(1)
 
-        assertThat(game.bonus).isEqualTo(8)
         assertThat(game.score()).isEqualTo(26)
+        assertThat(game.frames).contains(
+            Frame(10, null),
+            Frame(7, 1)
+        )
     }
 
     @Test
@@ -54,4 +63,28 @@ class GameTest {
         assertThat(game.score()).isEqualTo(90)
     }
 
+
+    @Test
+    fun `10 frames of spares of 5 and last 5 has score of 150`() {
+        val game = Game()
+
+        for (x in 0..9) {
+            game.roll(5)
+            game.roll(5)
+        }
+        game.roll(5)
+
+        assertThat(game.score()).isEqualTo(150)
+    }
+
+    @Test
+    fun `10 frames of strike has score of 300`() {
+        val game = Game()
+
+        for (x in 0..11) {
+            game.roll(10)
+        }
+
+        assertThat(game.score()).isEqualTo(300)
+    }
 }

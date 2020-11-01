@@ -52,8 +52,16 @@ data class Frame(
         }
     }
 
-    private fun strike(): Boolean {
+    fun strike(): Boolean {
         return firstThrow != null && firstThrow == 10
     }
+
+    fun spare(): Boolean {
+        return (firstThrow != null && secondThrow != null) && pins() == 10
+    }
+
+    fun pins(): Int = (firstThrow ?: 0) + (secondThrow ?: 0)
+
+    fun firstRoll() = firstThrow ?: 0
 
 }
